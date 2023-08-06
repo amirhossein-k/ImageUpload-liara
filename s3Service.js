@@ -18,17 +18,18 @@ const S3 = new aws.S3(config);
 
 const s3Uploade = async (file) => {
   const params = {
-    BUCKET: process.LIARA_BUCKET_NAME,
+    Bucket: process.env.LIARA_BUCKET_NAME,
     Key: `${Date.now().toString() + "| " + file.originalname}`,
     Body: file.buffer,
   };
+
   return await S3.upload(params).promise();
 };
 
 const s3UploadeMultiple = async (files) => {
   const params = files.map((file) => {
     return {
-      BUCKET: process.env.LIARA_BUCKET_NAME,
+      Bucket: process.env.LIARA_BUCKET_NAME,
       Key: `${Date.now().toString() + "| " + file.originalname}`,
       Body: file.buffer,
     };
@@ -40,7 +41,7 @@ const s3UploadeMultiple = async (files) => {
 const s3DeleteMultiple = async (files, key) => {
   const params = files.map((file, index) => {
     return {
-      BUCKET: process.env.LIARA_BUCKET_NAME,
+      Bucket: process.env.LIARA_BUCKET_NAME,
       Key: key[index],
     };
   });
@@ -53,7 +54,7 @@ const s3DeleteMultiple = async (files, key) => {
 // delete Single
 const s3DeleteSingle = async (file, key) => {
   const param = {
-    BUCKET: process.env.LIARA_BUCKET_NAME,
+    Bucket: process.env.LIARA_BUCKET_NAME,
     Key: key,
   };
   return await S3.deleteObject(param).promise();

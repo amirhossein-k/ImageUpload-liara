@@ -8,6 +8,7 @@ const {
 const singleFileUpload = async (req, res) => {
   try {
     const result = await s3Uploade(req.file);
+
     const file = {
       fileName: req.file.originalname,
       filePath: result.Location,
@@ -15,8 +16,11 @@ const singleFileUpload = async (req, res) => {
       fileSize: fileSizeFormater(req.file.size, 2),
       fileKey: result.Key,
     };
+
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
     const detailImage = {
-      time: Date.now(),
+      time: today.toDateString(),
       file: file,
     };
 
