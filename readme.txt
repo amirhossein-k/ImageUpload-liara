@@ -74,6 +74,8 @@ const formData = new FormData();
         );
 
         //data: {time,file}
+![alt text](https://s8.uupload.ir/files/post_fq0g.png)
+
 }catch(err){
     console.log(err)
 
