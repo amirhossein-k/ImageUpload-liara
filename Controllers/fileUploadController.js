@@ -8,6 +8,7 @@ const {
 const singleFileUpload = async (req, res) => {
   try {
     const result = await s3Uploade(req.file);
+    console.log(req.file, "req file");
 
     const file = {
       fileName: req.file.originalname,
@@ -25,6 +26,19 @@ const singleFileUpload = async (req, res) => {
     };
 
     res.status(201).json(detailImage);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+const deleteFileUpload = async (req, res) => {
+  try {
+    console.log(req.body);
+    const resultdelete = await s3DeleteSingle("", req.body.Key);
+
+    if (resultdelete) {
+      res.status(200).json("success");
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -145,4 +159,5 @@ module.exports = {
   multipleFileUpload,
   updateSingleFile,
   updateMultipleFile,
+  deleteFileUpload,
 };

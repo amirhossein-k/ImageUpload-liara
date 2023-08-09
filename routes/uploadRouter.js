@@ -4,6 +4,7 @@ const {
   multipleFileUpload,
   updateSingleFile,
   updateMultipleFile,
+  deleteFileUpload,
 } = require("../Controllers/fileUploadController");
 
 const router = express.Router();
@@ -14,5 +15,6 @@ router
   .route("/updateMultipleFile")
   .put(upload.array("files"), updateMultipleFile);
 router.route("/updateSingleFile").put(upload.single("file"), updateSingleFile);
+router.route("/deleteSingleFile").put(deleteFileUpload);
 
 module.exports = router;

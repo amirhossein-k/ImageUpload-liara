@@ -17,6 +17,7 @@ const BUCKET = process.env.LIARA_BUCKET_NAME;
 const S3 = new aws.S3(config);
 
 const s3Uploade = async (file) => {
+  console.log(file, "file");
   const params = {
     Bucket: process.env.LIARA_BUCKET_NAME,
     Key: `${Date.now().toString() + "| " + file.originalname}`,
@@ -53,6 +54,7 @@ const s3DeleteMultiple = async (files, key) => {
 
 // delete Single
 const s3DeleteSingle = async (file, key) => {
+  console.log(key);
   const param = {
     Bucket: process.env.LIARA_BUCKET_NAME,
     Key: key,
